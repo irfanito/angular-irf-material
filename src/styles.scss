@@ -16,7 +16,6 @@ body {
 }
 
 @import 'theme-variables';
-@import 'styles/print';
 
 $application-background-color: mat-color($grey, 400);
 
@@ -37,7 +36,6 @@ $application-background-color: mat-color($grey, 400);
   min-height: 100vh;
 
   background-color: $application-background-color;
-  @include print-background-color();
 }
 
 .header-wrapper {
@@ -64,14 +62,10 @@ $application-background-color: mat-color($grey, 400);
   flex-grow: 1;
 
   padding: 0 1rem 2rem 1rem;
-
-  @include print-no-horizontal-margin();
 }
 
 .stepper-wrapper {
   padding: 1rem;
 
   background-color: mat-color($grey, 50);
-  @include print-background-color();
-  @include print-hide();
 }
