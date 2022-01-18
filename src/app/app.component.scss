@@ -1,0 +1,56 @@
+@import 'theme-variables';
+@import 'styles/print';
+
+$application-background-color: mat-color($grey, 400);
+
+:host {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  // Height must take all the computed height
+  // but computed height might be smaller than the height viewport.
+  // Reciprocally, due to fix height of vega chart,
+  // the height viewport can be smaller than the computed height.
+  // That why we want to cover at least all the viewport,
+  // and fix the height to 100%
+  height: 100%;
+  min-height: 100vh;
+
+  background-color: $application-background-color;
+  @include print-background-color();
+}
+
+.header-wrapper {
+  display: block;
+  @media screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  @media print {
+    width: 100;
+  }
+}
+
+.content-wrapper {
+  padding-top: 2.5rem;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding: 0 1rem 2rem 1rem;
+}
+
+.stepper-wrapper {
+  padding: 1rem;
+
+  background-color: mat-color($grey, 50);
+}
