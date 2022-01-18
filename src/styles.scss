@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'theme';
+
+@import 'styles/autocomplete.scss';
+@import 'styles/badge.scss';
+@import 'styles/card.scss';
+@import 'styles/form-field-appearance-classic.scss';
+@import 'styles/form.scss';
+@import 'styles/print.scss';
+@import 'styles/hide.scss';
+@import 'styles/indicator.scss';
+@import 'styles/input.scss';
+@import 'styles/layout.scss';
+@import 'styles/list.scss';
+@import 'styles/loader.scss';
+@import 'styles/loading-button.scss';
+@import 'styles/media-query.scss';
+@import 'styles/menu.scss';
+@import 'styles/snack-bar.scss';
+@import 'styles/space.scss';
+@import 'styles/table.scss';
+@import 'styles/tabs.scss';
+@import 'styles/text.scss';
+@import 'styles/tooltip.scss';
+@import 'styles/mat-card.override.scss';
+
+body {
+  margin: 0;
+
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+}

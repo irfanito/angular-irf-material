@@ -1,0 +1,167 @@
+@import 'theme-variables';
+@import 'styles/print';
+
+.card-presentation {
+  transition: color 300ms ease, background-color 300ms ease;
+}
+
+.card-presentation--contrast {
+  color: mat-contrast($grey, 300);
+
+  background-color: mat-color($grey, 300);
+}
+
+.card-outlined {
+  color: mat-color($grey, 900);
+
+  background-color: transparent;
+
+  border: 2px solid mat-color($grey, 600);
+
+  .mat-card-subtitle {
+    color: mat-color($grey, 800);
+  }
+
+  &:hover {
+    background-color: mat-color($grey, 50);
+
+    border-color: mat-color($grey, 50);
+  }
+}
+
+.zone-highlight {
+  padding: 1rem;
+
+  background-color: mat-color($grey, 200);
+
+  border-radius: 0.5rem;
+
+  .mat-form-field-appearance-classic .mat-form-field-flex {
+    background-color: mat-color($grey, 50);
+    @include print-background-color();
+  }
+  @include print-no-margin();
+  @include print-background-color();
+  @include print-no-border();
+}
+
+.card-section {
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  &:not(:last-child) {
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid mat-color($grey, 300);
+  }
+}
+.card-section-title {
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: mat-color($grey, 600);
+
+  margin-block-start: 0;
+}
+.card-section-content {
+  a {
+    transition: color 150ms ease, transform 300ms ease;
+    :not(.mat-icon) {
+      text-decoration: underline;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .card-section-action {
+    float: right;
+  }
+
+  .mat-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.card-legend {
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+
+  font-size: 0.8rem;
+  color: mat-color($grey, 600);
+}
+
+.card-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.card-folder {
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem 1rem;
+
+  background-color: mat-color($grey, 50);
+
+  border-radius: 0.5rem;
+
+  transform: translate(50%, 50%);
+  transition: box-shadow 100ms ease;
+
+  cursor: pointer;
+
+  .card-folder-description {
+    margin: 0 0.5rem;
+  }
+
+  .card-folder-indicator {
+    transition: transform 100ms ease;
+    transform-origin: center;
+  }
+  &.card-folder__open {
+    .card-folder-indicator {
+      transform: rotateZ(-90deg);
+    }
+  }
+
+  &:hover {
+    @include mat-elevation(4);
+  }
+  @include mat-elevation(2);
+}
+
+.card-folder__disabled {
+  color: mat-color($grey, 700);
+
+  background-color: mat-color($grey, 200);
+  cursor: not-allowed;
+}
+
+// Print mat-card overload
+
+.mat-card {
+  .mat-card-header .mat-card-header-text,
+  .mat-card-content,
+  .mat-card-content ul {
+    @include print-no-margin();
+  }
+
+  &:not([class*='mat-elevation-z']) {
+    @media print {
+      box-shadow: none;
+    }
+  }
+  .mat-card-actions {
+    @include print-hide();
+  }
+
+  @include print-background-color();
+  @include print-no-border();
+}

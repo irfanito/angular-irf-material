@@ -1,0 +1,272 @@
+/**
+ * Side card layout
+ *
+ *   cards               main-content
+ *   _______    _____________________________
+ *  |Current|> |                             |
+ *   _______   |                             |
+ *             |                             |
+ *   _______   |                             |
+ *  |       |  |                             |
+ *   _______   |                             |
+ *             |                             |
+ *              _____________________________
+ */
+
+.side-card-layout {
+  display: flex;
+
+  .side-card-layout-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    min-width: 25rem;
+
+    margin-right: 3rem;
+
+    > * {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .side-card-layout-card {
+    &:not(.side-card-layout-card--current) {
+      cursor: pointer;
+      @include mat-elevation(0);
+    }
+    @include mat-elevation(4);
+  }
+
+  .side-card-layout-main-content {
+    width: 100%;
+  }
+}
+
+/**
+ * Side card layout on print
+ *
+ *   cards
+ *   _______    _______
+ *  |       |  |       |
+ *   _______    _______
+ *  main-content
+ *   _____________________________
+ *  |                             |
+ *  |                             |
+ *  |                             |
+ *  |                             |
+ *  |                             |
+ *  |                             |
+ *  |                             |
+ *   _____________________________
+ */
+
+@media print {
+  .side-card-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .side-card-layout-cards {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      > * {
+        margin-right: 1rem;
+      }
+    }
+
+    .side-card-layout-card {
+      @include mat-elevation(0);
+    }
+  }
+}
+
+/**
+ * layout-row
+ *  __________    __________    __________
+ * |          |  |          |  |          |
+ * |          |  |          |  |          |
+ * |          |  |          |  |          |
+ * |          |  |          |  |          |
+ *  __________    __________    __________
+ */
+.layout-row {
+  display: flex;
+  flex-direction: row;
+
+  > :not(:first-child) {
+    margin-left: 2rem;
+  }
+  > .layout-item__no-gutter {
+    margin-left: 0;
+  }
+}
+.layout-row__space-between {
+  justify-content: space-between;
+}
+.layout-row__small-gutter {
+  > :not(:first-child) {
+    margin-left: 1rem;
+  }
+}
+.layout-row__wrap {
+  flex-wrap: wrap;
+
+  margin-top: -2rem;
+  margin-left: -2rem;
+
+  > :not(:first-child),
+  > :first-child {
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+}
+.layout-row__no-gutter {
+  > :not(:first-child) {
+    margin-left: 0;
+  }
+}
+.layout-row__start {
+  align-items: flex-start;
+}
+.layout-row__center {
+  align-items: center;
+}
+
+/**
+ * layout-column
+ *  __________
+ * |          |
+ *  __________
+ *
+ *  __________
+ * |          |
+ *  __________
+
+ *  __________
+ * |          |
+ * |          |
+ *  __________
+ */
+.layout-column {
+  display: flex;
+  flex-direction: column;
+
+  > :not(:first-child) {
+    margin-top: 2rem;
+  }
+
+  > .layout-item__no-gutter {
+    margin-top: 0;
+  }
+}
+.layout-column__start {
+  align-items: flex-start;
+}
+.layout-column__end {
+  align-items: flex-end;
+}
+.layout-column__center {
+  align-items: center;
+}
+.layout-column__stretch {
+  align-items: stretch;
+}
+.layout-column__small-gutter {
+  > :not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+.layout-column__small-gutter-down {
+  > :last-child {
+    margin-bottom: 1rem;
+  }
+}
+.layout-column__no-gutter {
+  > :not(:first-child) {
+    margin-top: 0;
+  }
+}
+
+/**
+ *  ____________________    __________    __________
+ * | layout-item__start |  |          |  |          |
+ *  ____________________   |          |  |          |
+ *                         |          |  |          |
+ *                         |          |  |          |
+ *                          __________    __________
+ *  __________________
+ * |layout-item__start|
+ *  __________________
+ *
+ *  __________________________________
+ * |                                  |
+ *  __________________________________
+ *
+ *  __________________________________
+ * |                                  |
+ * |                                  |
+ *  __________________________________
+ */
+
+.layout-item__start {
+  align-self: flex-start;
+}
+
+/**
+ *                          __________    __________
+ *                         |          |  |          |
+ *                         |          |  |          |
+ *  ____________________   |          |  |          |
+ * | layout-item__end   |  |          |  |          |
+ *  ____________________    __________    __________
+ *
+ *
+ *                  __________________
+ *                 |layout-item__end  |
+ *                  __________________
+ *
+ *  __________________________________
+ * |                                  |
+ *  __________________________________
+ *
+ *  __________________________________
+ * |                                  |
+ * |                                  |
+ *  __________________________________
+ */
+
+.layout-item__end {
+  align-self: flex-end;
+}
+
+/**
+ *                          __________    __________
+ *                         |          |  |          |
+ *  ____________________   |          |  |          |
+ * | layout-item__center|  |          |  |          |
+ *  ____________________   |          |  |          |
+ *                         |          |  |          |
+ *                          __________    __________
+ *
+ *
+ *         __________________
+ *        |layout-item__center|
+ *         __________________
+ *
+ *  __________________________________
+ * |                                  |
+ *  __________________________________
+ *
+ *  __________________________________
+ * |                                  |
+ * |                                  |
+ *  __________________________________
+ */
+
+.layout-item__center {
+  align-self: center;
+}

@@ -1,0 +1,178 @@
+@import '~@angular/material/theming';
+
+// Theme styles that only apply to the classic appearance of the form-field.
+
+@mixin mat-form-field-classic-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  $classic-background: transparent;
+  $classic-disabled-background: transparent;
+  $underline-color: mat-color(
+    $foreground,
+    divider,
+    if($is-dark-theme, 0.5, 0.42)
+  );
+  $label-disabled-color: mat-color($foreground, disabled-text);
+  $secondary-text-color: $dark-primary-text;
+  $text-color: mat-color($foreground, text);
+  $focused-color: mat-color(map-get($theme, primary));
+  $invalid-color: mat-color(map-get($theme, warn));
+  $invalid-text-color: mat-color(map-get($theme, warn), darker);
+
+  .mat-form-field-appearance-classic {
+    color: $secondary-text-color;
+
+    .mat-form-field-label {
+      color: $secondary-text-color;
+    }
+
+    &.mat-form-field-invalid {
+      color: $invalid-color;
+
+      .mat-error,
+      .mat-form-field-label,
+      .mat-form-field-prefix,
+      .mat-form-field-suffix,
+      .mat-input-element {
+        color: $invalid-text-color;
+      }
+    }
+
+    .mat-form-field-flex {
+      position: relative;
+
+      align-items: center;
+
+      padding: 0.5rem;
+
+      background-color: $classic-background;
+
+      border: 1px solid currentColor;
+      border-radius: 5px;
+
+      box-shadow: 0px 0px 0px 0px currentColor;
+
+      transition: box-shadow 300ms ease;
+    }
+
+    &.mat-form-field-fullsize {
+      width: 100%;
+    }
+
+    &.mat-form-field-disabled {
+      color: $label-disabled-color;
+      .mat-form-field-flex {
+        background-color: $classic-disabled-background;
+      }
+      .mat-form-field-label {
+        color: $label-disabled-color;
+      }
+    }
+
+    &:hover,
+    &.mat-focused {
+      .mat-form-field-flex {
+        box-shadow: 0px 0px 0px 1px currentColor;
+      }
+    }
+
+    .mat-form-field-infix {
+      position: initial;
+    }
+
+    &:not(.mat-focused):not(.mat-form-field-invalid):not(:hover):not(.mat-form-field-disabled) {
+      .mat-form-field-flex {
+        border-color: $dark-dividers;
+      }
+    }
+    &.mat-focused:not(.mat-form-field-invalid):not(:hover):not(.mat-form-field-disabled) {
+      color: $focused-color;
+    }
+    &:hover:not(.mat-form-field-invalid):not(.mat-focused):not(.mat-form-field-disabled) {
+      color: $text-color;
+      .mat-form-field-label {
+        color: $text-color;
+      }
+    }
+  }
+}
+
+// Used to make instances of the _mat-form-field-label-floating mixin negligibly different,
+// and prevent Google's CSS Optimizer from collapsing the declarations. This is needed because some
+// of the selectors contain pseudo-classes not recognized in all browsers. If a browser encounters
+// an unknown pseudo-class it will discard the entire rule set.
+$mat-form-field-classic-dedupe: 0;
+
+// Applies a floating label above the form field control itself.
+@mixin _mat-form-field-classic-label-floating(
+  $font-scale,
+  $infix-padding,
+  $infix-margin-top
+) {
+  $mat-form-field-classic-dedupe: $mat-form-field-classic-dedupe + 0.00001 !global;
+
+  width: 100% / $font-scale + $mat-form-field-classic-dedupe;
+
+  transform: translateY(0) scale($font-scale);
+}
+
+@mixin mat-form-field-classic-typography($config) {
+  // The unit-less line-height from the font config.
+  $line-height: mat-line-height($config, input);
+  // The amount to scale the font for the floating label and subscript.
+  $subscript-font-scale: 1;
+  // The padding on top of the infix.
+  $infix-padding-top: 0.7em;
+  // The padding below the infix.
+  $infix-padding-bottom: 0.7em;
+  // The margin applied to the form-field-infix to reserve space for the floating label.
+  $infix-margin-top: 1em * $line-height * $subscript-font-scale;
+  // The amount we offset the label from the input text in the classic appearance.
+  $classic-appearance-label-offset: 0;
+
+  .mat-form-field-appearance-classic {
+    margin-top: 1.4rem;
+
+    &.mat-form-field-appearance-classic__compact {
+      margin-top: 0;
+    }
+    &.mat-form-field-appearance-classic__large {
+      width: 20rem;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1.4rem;
+
+      padding-top: 0;
+    }
+
+    .mat-form-field-infix {
+      padding: $infix-padding-top 0 $infix-padding-bottom 0;
+
+      border: none;
+    }
+
+    .mat-form-field-label {
+      top: 0;
+
+      margin-top: $classic-appearance-label-offset;
+    }
+
+    &.mat-form-field-can-float {
+      &.mat-form-field-should-float .mat-form-field-label,
+      .mat-input-server:focus
+        + .mat-form-field-label-wrapper
+        .mat-form-field-label {
+        @include _mat-form-field-classic-label-floating(
+          $subscript-font-scale,
+          $infix-padding-top + $classic-appearance-label-offset,
+          $infix-margin-top
+        );
+      }
+    }
+  }
+}
+
+@include mat-form-field-classic-theme($theme);
+@include mat-form-field-classic-typography(mat-typography-config());
