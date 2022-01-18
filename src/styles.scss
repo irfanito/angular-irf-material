@@ -2,32 +2,76 @@
 
 @import 'theme';
 
-@import 'styles/autocomplete.scss';
-@import 'styles/badge.scss';
 @import 'styles/card.scss';
 @import 'styles/form-field-appearance-classic.scss';
 @import 'styles/form.scss';
-@import 'styles/print.scss';
-@import 'styles/hide.scss';
-@import 'styles/indicator.scss';
 @import 'styles/input.scss';
 @import 'styles/layout.scss';
-@import 'styles/list.scss';
-@import 'styles/loader.scss';
-@import 'styles/loading-button.scss';
-@import 'styles/media-query.scss';
-@import 'styles/menu.scss';
-@import 'styles/snack-bar.scss';
-@import 'styles/space.scss';
-@import 'styles/table.scss';
-@import 'styles/tabs.scss';
-@import 'styles/text.scss';
-@import 'styles/tooltip.scss';
-@import 'styles/mat-card.override.scss';
 
 body {
   margin: 0;
 
   font-family: Roboto, Arial, sans-serif;
   font-size: 16px;
+}
+
+@import 'theme-variables';
+@import 'styles/print';
+
+$application-background-color: mat-color($grey, 400);
+
+:host {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  // Height must take all the computed height
+  // but computed height might be smaller than the height viewport.
+  // Reciprocally, due to fix height of vega chart,
+  // the height viewport can be smaller than the computed height.
+  // That why we want to cover at least all the viewport,
+  // and fix the height to 100%
+  height: 100%;
+  min-height: 100vh;
+
+  background-color: $application-background-color;
+  @include print-background-color();
+}
+
+.header-wrapper {
+  display: block;
+  @media screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  @media print {
+    width: 100;
+  }
+}
+
+.content-wrapper {
+  padding-top: 2.5rem;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  padding: 0 1rem 2rem 1rem;
+
+  @include print-no-horizontal-margin();
+}
+
+.stepper-wrapper {
+  padding: 1rem;
+
+  background-color: mat-color($grey, 50);
+  @include print-background-color();
+  @include print-hide();
 }
